@@ -28,7 +28,6 @@ const updateAllMaterials = () => {
       child instanceof THREE.Mesh &&
       child.material instanceof THREE.MeshStandardMaterial
     ) {
-      child.material.envMap = environmentMap;
       child.material.envMapIntensity = debugObject.envMapIntensity;
     }
   });
@@ -44,6 +43,7 @@ const environmentMap = cubeTextureLoader.load([
   '/textures/environmentMaps/0/nz.jpg',
 ]);
 scene.background = environmentMap;
+scene.environment = environmentMap; // applies the envMap to every compatible material in the scene
 
 debugObject.envMapIntensity = 5;
 gui

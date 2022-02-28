@@ -25,7 +25,7 @@ const testSphere = new THREE.Mesh(
 scene.add(testSphere);
 
 // Lights
-const directionalLight = new THREE.DirectionalLight('#ffffff', 1);
+const directionalLight = new THREE.DirectionalLight('#ffffff', 3);
 directionalLight.position.set(0.25, 3, -2.25);
 scene.add(directionalLight);
 
@@ -104,6 +104,8 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+// the default threeJS light intensities are based on an arbitrary scale unit and don't reflect real-world values. By setting 'physicallyCorrectLights' to true, it makes it easier to match across softwares (e.g. other softwares could use their own arbitrary unit system or set them to use physically correct units - when importing lights in from Blender, the lights will look similar in ThreeJS too)
+renderer.physicallyCorrectLights = true;
 
 /**
  * Animate

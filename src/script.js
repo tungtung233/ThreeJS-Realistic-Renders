@@ -42,10 +42,11 @@ const environmentMap = cubeTextureLoader.load([
   '/textures/environmentMaps/0/pz.jpg',
   '/textures/environmentMaps/0/nz.jpg',
 ]);
+environmentMap.encoding = THREE.sRGBEncoding;
 scene.background = environmentMap;
 scene.environment = environmentMap; // applies the envMap to every compatible material in the scene
 
-debugObject.envMapIntensity = 5;
+debugObject.envMapIntensity = 1;
 gui
   .add(debugObject, 'envMapIntensity')
   .min(0)
@@ -152,6 +153,9 @@ renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 // the default threeJS light intensities are based on an arbitrary scale unit and don't reflect real-world values. By setting 'physicallyCorrectLights' to true, it makes it easier to match across softwares (e.g. other softwares could use their own arbitrary unit system or set them to use physically correct units - when importing lights in from Blender, the lights will look similar in ThreeJS too)
 renderer.physicallyCorrectLights = true;
+// By default ThreeJS uses linear encoding - all textures that we can see directly (e.g. the envMap background, the baseColor maps for the helmet, but not the normalMaps or bumpMaps etc. for the helmet) should have THREE.sRGBEncoding
+// However, the GLTFLoader automatically fixed the textures for the gltf model
+renderer.outputEncoding = THREE.sRGBEncoding;
 
 /**
  * Animate

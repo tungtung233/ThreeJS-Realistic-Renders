@@ -2,6 +2,11 @@ import './style.css';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as dat from 'lil-gui';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+
+// Loaders
+const gltfLoader = new GLTFLoader();
+
 
 /**
  * Base
@@ -23,6 +28,14 @@ const testSphere = new THREE.Mesh(
   new THREE.MeshStandardMaterial()
 );
 scene.add(testSphere);
+
+// Models
+gltfLoader.load(
+  '/models/FlightHelmet/glTF/FlightHelmet.gltf',
+  (gltf) => {
+    scene.add(gltf.scene)
+  }
+)
 
 // Lights
 const directionalLight = new THREE.DirectionalLight('#ffffff', 3);

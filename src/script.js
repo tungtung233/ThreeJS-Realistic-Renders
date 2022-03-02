@@ -30,6 +30,9 @@ const updateAllMaterials = () => {
     ) {
       child.material.envMapIntensity = debugObject.envMapIntensity;
       child.material.needsUpdate = true;
+      //enabling all meshes in the scene to be able to cast and receive shadows - be careful, this can sometimes be very demanding if your scene is large
+      child.castShadow = true;
+      child.receiveShadow = true;
     }
   });
 };

@@ -149,6 +149,7 @@ controls.enableDamping = true;
  */
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
+  antialias: true,
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -160,7 +161,7 @@ renderer.outputEncoding = THREE.sRGBEncoding;
 // tone mapping is usually used to convert HDR textures to standard RGB values
 // we aren't using any HDR textures, but changing the toneMapping makes some nice differences
 renderer.toneMapping = THREE.ReinhardToneMapping;
-renderer.toneMappingExposure = 2
+renderer.toneMappingExposure = 2;
 
 gui
   .add(renderer, 'toneMapping', {
@@ -174,7 +175,7 @@ gui
     updateAllMaterials();
   });
 
-gui.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.001)
+gui.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.001);
 
 /**
  * Animate

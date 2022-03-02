@@ -29,6 +29,7 @@ const updateAllMaterials = () => {
       child.material instanceof THREE.MeshStandardMaterial
     ) {
       child.material.envMapIntensity = debugObject.envMapIntensity;
+      child.material.needsUpdate = true;
     }
   });
 };
@@ -156,6 +157,21 @@ renderer.physicallyCorrectLights = true;
 // By default ThreeJS uses linear encoding - all textures that we can see directly (e.g. the envMap background, the baseColor maps for the helmet, but not the normalMaps or bumpMaps etc. for the helmet) should have THREE.sRGBEncoding
 // However, the GLTFLoader automatically fixed the textures for the gltf model
 renderer.outputEncoding = THREE.sRGBEncoding;
+// tone mapping is usually used to convert HDR textures to standard RGB values
+// we aren't using any HDR textures, but changing the toneMapping makes some nice differences
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+
+gui
+  .add(renderer, 'toneMapping', {
+    No: THREE.NoToneMapping,
+    Linear: THREE.LinearToneMapping,
+    Reinhard: THREE.ReinhardToneMapping,
+    Cineon: THREE.CineonToneMapping,
+    ACESFilmic: THREE.ACESFilmicToneMapping,
+  })
+  .onFinishChange(() => {
+    updateAllMaterials();
+  });
 
 /**
  * Animate

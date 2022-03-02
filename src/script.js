@@ -96,6 +96,11 @@ directionalLight.position.set(0.25, 3, -2.25);
 directionalLight.castShadow = true;
 directionalLight.shadow.camera.far = 15;
 directionalLight.shadow.mapSize.set(1024, 1024);
+// remove shadow acne - there are artifacts on the burger caused by the shadow. Shadow acne can occur on both smooth and flat surfaces. What's happening here is that the burger is casting a shadow on its own surface.
+// we have to tweak the light shadow's bias and normalBias property to fix shadow acne
+// the bias usually helps for flat surfaces
+// the normalBias usually helps for rounded surfaces. Increase it until the shadow acne is barely visible
+directionalLight.shadow.normalBias = 0.05;
 scene.add(directionalLight);
 
 // see the camera that is being used to create the shadow map and set it up

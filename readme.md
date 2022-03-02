@@ -1,4 +1,5 @@
-# Three.js Journey
+# Realistic Renders - Three.js Journey
+This project was completed with the goal of understanding how to create realistic renders in ThreeJS.
 
 ## Setup
 Download [Node.js](https://nodejs.org/en/download/).

@@ -159,7 +159,8 @@ renderer.physicallyCorrectLights = true;
 renderer.outputEncoding = THREE.sRGBEncoding;
 // tone mapping is usually used to convert HDR textures to standard RGB values
 // we aren't using any HDR textures, but changing the toneMapping makes some nice differences
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMapping = THREE.ReinhardToneMapping;
+renderer.toneMappingExposure = 2
 
 gui
   .add(renderer, 'toneMapping', {
@@ -172,6 +173,8 @@ gui
   .onFinishChange(() => {
     updateAllMaterials();
   });
+
+gui.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.001)
 
 /**
  * Animate

@@ -75,7 +75,13 @@ gltfLoader.load('/models/FlightHelmet/glTF/FlightHelmet.gltf', (gltf) => {
 // Lights
 const directionalLight = new THREE.DirectionalLight('#ffffff', 3);
 directionalLight.position.set(0.25, 3, -2.25);
+directionalLight.castShadow = true;
+directionalLight.shadow.camera.far = 15;
 scene.add(directionalLight);
+
+// see the camera that is being used to create the shadow map and set it up
+// const directionalLightCameraHelper = new THREE.CameraHelper(directionalLight.shadow.camera);
+// scene.add(directionalLightCameraHelper)
 
 gui
   .add(directionalLight, 'intensity')
@@ -162,6 +168,8 @@ renderer.outputEncoding = THREE.sRGBEncoding;
 // we aren't using any HDR textures, but changing the toneMapping makes some nice differences
 renderer.toneMapping = THREE.ReinhardToneMapping;
 renderer.toneMappingExposure = 2;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 gui
   .add(renderer, 'toneMapping', {

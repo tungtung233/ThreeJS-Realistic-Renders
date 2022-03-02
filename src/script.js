@@ -75,6 +75,21 @@ gltfLoader.load('/models/FlightHelmet/glTF/FlightHelmet.gltf', (gltf) => {
   updateAllMaterials();
 });
 
+gltfLoader.load('/models/hamburger.glb', (gltf) => {
+  gltf.scene.scale.set(0.3, 0.3, 0.3);
+  gltf.scene.position.set(0, -3, 5);
+  scene.add(gltf.scene);
+
+  gui
+    .add(gltf.scene.rotation, 'y')
+    .min(-Math.PI)
+    .max(Math.PI)
+    .step(0.001)
+    .name('rotation');
+
+  updateAllMaterials();
+});
+
 // Lights
 const directionalLight = new THREE.DirectionalLight('#ffffff', 3);
 directionalLight.position.set(0.25, 3, -2.25);
